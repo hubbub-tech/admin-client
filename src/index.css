@@ -1,13 +1,217 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1, h2, h3, h4, h5, h6
+{
+  font-family: 'Roboto Slab', serif;
 }
+
+.text-hubbub {
+  color: #69b6e7;
+  font-weight: bold;
+  animation: animateText 20000ms linear infinite;
+}
+
+@keyframes animateText {
+  0% {
+    color: #69b6e7;
+  }
+  50% {
+    color: #3d4fe0;
+  }
+  100% {
+    color: #69b6e7;
+  }
+}
+
+.btn-hubbub {
+  background-color: #69b6e7;
+  border-width: 1px 1px;
+  border: #69b6e7;
+  color: white;
+}
+
+.btn-hubbub:hover {
+  background-color: #3d4fe0;
+  border-width: 1px 1px;
+  border: #3d4fe0;
+  color: white;
+  transform: scale(1);
+  animation: grow 5000ms ease-in-out infinite;
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.btn-neutral {
+  background-color: #000000;
+  border: solid #000000;
+  border-width: 1px 1px;
+  color: #ffffff;
+}
+
+.btn-neutral:hover {
+  border: solid #000000;
+  border-width: 1px 1px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+a, .btn-link {
+  color: #69b6e7;
+  text-decoration: none;
+}
+
+a:hover, .btn-link:hover {
+  color: #3d4fe0;
+  text-decoration: none;
+}
+
+.badge-primary {
+  background-color: #e76977;
+}
+
+.text-alert {
+  color: #e76977;
+}
+
+.bg-hubbub {
+  color: #69b6e7;
+}
+
+a.custom-card {
+  color: inherit;
+}
+
+a.custom-card:hover {
+  color: inherit;
+}
+
+.img-float {
+  transform: translatey(0px);
+  animation: float 10000ms ease-in-out infinite;
+}
+
+.img-float:hover {
+  opacity: 0.3;
+}
+
+@keyframes float {
+	0% {
+		box-shadow: 0 5px 10px 0px rgba(0,0,0,0.4);
+		transform: translatey(0px);
+	}
+	50% {
+		box-shadow: 0 10px 10px 0px rgba(0,0,0,0.2);
+		transform: translatey(-5px);
+	}
+	100% {
+		box-shadow: 0 5px 10px 0px rgba(0,0,0,0.4);
+		transform: translatey(0px);
+	}
+}
+
+.hide {
+  display: none;
+}
+
+.category:hover + .hide {
+  display: block;
+}
+
+.hubbub-background {
+  background: linear-gradient(-45deg, #3d4fe0, #69b6e7, #3d4fe0);
+  background-size: 400% 400%;
+  animation: gradient 20000ms linear infinite;
+}
+
+@keyframes gradient {
+  0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.zoom-in {
+  transform: scale(1);
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+
+}
+
+.zoom-in:hover {
+  transform: scale(1.02);
+  transition-duration: 300ms;
+  transition-timing-function: ease-in;
+
+}
+
+.card-shadow {
+  box-shadow: 0 0 5px rgba(33,33,33,.1);
+}
+
+.card-shadow:hover {
+  box-shadow: 0 0 0px rgba(33,33,33,.2);
+}
+
+.crop-circle {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.crop-circle img {
+  max-width: 100%;
+  margin: -30px -50px -100px 0;
+}
+
+hr.divider {
+ margin: 0em;
+ border-width: 2px;
+}
+
+.highlight-alert {
+  background-color: #ffffff;
+  animation: highlightFade 5000ms 1 ease-out;
+}
+
+@keyframes highlightFade {
+  0% { background-color: #ffffff;}
+  50% { background-color: #fbbc04;}
+  100% { background-color: #ffffff;}
+}
+
+.border-alert {
+  border-width: 2px;
+  border: #fec008;
+  animation: alertFade 1000ms 1 linear;
+}
+
+@keyframes alertFade {
+  from { border: #fec008;}
+  to { border: #d8d9db;}
+}
+
+@media (min-width: 300px) and (max-width: 800px) {
+   .collapse-sub {
+       display: none !important;
+   }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Slab&display=swap');

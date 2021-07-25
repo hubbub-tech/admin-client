@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { Route, Switch } from 'react-router-dom';
 
-function App() {
+import Navbar from './components/base/Navbar';
+import Flash from './components/base/Flash';
+import Footer from './components/base/Footer';
+
+import OrdersDashboard from './components/pages/OrdersDashboard';
+
+const App = () => {
+  const [flashMessages, setFlashMessages] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar cookies={cookies} />
+      <Flash flashMessages={flashMessages} setFlashMessages={setFlashMessages} />
+      <Switch>
+        <Route exact path="/">
+          <OrdersDashboard />
+        </Route>
+      </Switch>
+      <Footer />
     </div>
   );
 }
