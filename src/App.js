@@ -8,6 +8,7 @@ import Flash from './components/base/Flash';
 import Footer from './components/base/Footer';
 
 import OrdersDashboard from './components/pages/OrdersDashboard';
+import OrderSummary from './components/pages/OrderSummary';
 
 const App = () => {
   const [flashMessages, setFlashMessages] = useState([]);
@@ -17,8 +18,11 @@ const App = () => {
       <Navbar cookies={cookies} />
       <Flash flashMessages={flashMessages} setFlashMessages={setFlashMessages} />
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/orders">
           <OrdersDashboard />
+        </Route>
+        <Route exact path="/order/summary/id=:orderId">
+          <OrderSummary />
         </Route>
       </Switch>
       <Footer />
