@@ -46,4 +46,43 @@ const sortList = (list, key) => {
   return listCopy;
 }
 
-export { sortList };
+const toMilitaryTime = (timeRangeStr) => {
+  let startTime;
+  let endTime;
+  let timeRange = timeRangeStr.toLowerCase();
+  if (timeRange.includes('am')) {
+    timeRange = timeRange.replace('am', '');
+    const times = timeRange.split('-');
+    startTime = times[0] + ':00';
+    endTime = times[1] + ':00';
+  } else if (timeRange.includes('pm')) {
+    timeRange = timeRange.replace('pm', '');
+    const times = timeRange.split('-');
+    endTime = parseInt(times[1]);
+    if (endTime === 12) {
+      startTime = times[0] + ':00';
+      endTime = times[1] + ':00';
+    } else if (endTime === 1) {
+      startTime = times[0] + ':00';
+      endTime = (endTime + 12).toString() + ':00';
+    } else {
+      startTime = (parseInt(times[0]) + 12).toString() + ':00';
+      endTime = (endTime + 12).toString() + ':00';
+    }
+  }
+  if (startTime.length === 4) {
+    startTime = '0' + startTime;
+  }
+  if (endTime.length === 4) {
+    endTime = '0' + endTime;
+  }
+  let startTimeMoment = moment(startTime, 'HH:mm').format('h:mm:ss A');
+  let endTimeMoment = moment(endTime, 'HH:mm').format('h:mm:ss A');
+  return [startTimeMoment, endTimeMoment];
+}
+
+function convert(input) {
+  return moment(input, 'HH:mm:ss').format('h:mm:ss A');
+}
+
+export { sortList, toMilitaryTime };
