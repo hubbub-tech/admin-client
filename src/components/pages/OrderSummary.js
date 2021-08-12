@@ -2,7 +2,10 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-const OrderSummary = () => {
+import ConfirmDropoffForm from '../forms/ConfirmDropoffForm';
+import ConfirmPickupForm from '../forms/ConfirmPickupForm';
+
+const OrderSummary = ({ setFlashMessages }) => {
   const { orderId } = useParams();
   const [order, setOrder] = useState({
     "renter": {},
@@ -48,25 +51,38 @@ const OrderSummary = () => {
                 />
               </div>
               <div className="col-sm-8 mb-3">
-                <p className="text-start fs-5 fw-bold">Description</p>
-                <p className="text-start">{ order.item.details.description }</p>
-                <p className="text-start fs-5 fw-bold mt-2">Original Rental Period</p>
-                <p className="text-start">{ order.res_date_start } to { order.res_date_end }</p>
-                <p className="text-start fs-5 fw-bold mt-2">Is Extended:
-                  <span className="text-hubbub">
-                    {order.res_date_end !== order.ext_date_end ? ' Yes': ' No'}
-                  </span>
-                </p>
-                {order.res_date_end !== order.ext_date_end &&
-                  <p className="text-start">Extended to { order.ext_date_end }</p>
-                }
+                <div className="card mb-3">
+                  <div className="card-body">
+                    <p className="text-start fs-5 fw-bold">Description</p>
+                    <p className="text-start">{ order.item.details.description }</p>
+                    <p className="text-start fs-5 fw-bold mt-2">Original Rental Period</p>
+                    <p className="text-start">{ order.res_date_start } to { order.res_date_end }</p>
+                    <p className="text-start fs-5 fw-bold mt-2">Is Extended:
+                      <span className="text-hubbub">
+                        {order.res_date_end !== order.ext_date_end ? ' Yes': ' No'}
+                      </span>
+                    </p>
+                    {order.res_date_end !== order.ext_date_end &&
+                      <p className="text-start">Extended to { order.ext_date_end }</p>
+                    }
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="row my-3">
-              <div className="col-12">
-                FILLER
+            {order.dropoff !== null &&
+              <div className="row my-3">
+                <div className="col-12">
+                  <ConfirmDropoffForm order={order} setFlashMessages={setFlashMessages} />
+                </div>
               </div>
-            </div>
+            }
+            {order.pickup !== null &&
+              <div className="row my-3">
+                <div className="col-12">
+                  <ConfirmPickupForm order={order} setFlashMessages={setFlashMessages} />
+                </div>
+              </div>
+            }
           </div>
           <div className="col-sm-1"></div>
         </div>

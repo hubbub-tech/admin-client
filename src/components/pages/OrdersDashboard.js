@@ -10,7 +10,6 @@ const OrdersDashboard = () => {
     fetch(process.env.REACT_APP_SERVER + '/orders')
     .then(res => res.json())
     .then(data => setOrders(data.orders));
-    console.log(`made call to: ${process.env.REACT_APP_SERVER}`)
   }, []);
   return (
     <main>
