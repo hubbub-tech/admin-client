@@ -62,7 +62,7 @@ const ValidTimeInput = ({
             onClick={onSubmit}
             disabled={!isValid}
           >
-            Button
+            Set Time
           </button>
         </div>
       </div>

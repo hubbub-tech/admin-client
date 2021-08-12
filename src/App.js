@@ -9,8 +9,6 @@ import Footer from './components/base/Footer';
 
 import OrdersDashboard from './components/pages/OrdersDashboard';
 import OrderSummary from './components/pages/OrderSummary';
-import ConfirmDropoff from './components/pages/ConfirmDropoff';
-import ConfirmPickup from './components/pages/ConfirmPickup';
 import TasksDashboard from './components/pages/TasksDashboard';
 
 const App = () => {
@@ -26,12 +24,6 @@ const App = () => {
         </Route>
         <Route exact path="/order/summary/id=:orderId">
           <OrderSummary setFlashMessages={setFlashMessages} />
-        </Route>
-        <Route exact path="/confirm/o/dropoff/id=:orderId">
-          <ConfirmDropoff setFlashMessages={setFlashMessages} />
-        </Route>
-        <Route exact path="/confirm/o/pickup/id=:orderId">
-          <ConfirmPickup setFlashMessages={setFlashMessages} />
         </Route>
         <Route exact path="/tasks">
           <TasksDashboard flashMessages={flashMessages} setFlashMessages={setFlashMessages} />

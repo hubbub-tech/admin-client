@@ -2,8 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 import SetTaskTimeForm from '../forms/SetTaskTimeForm';
+import CompleteTaskForm from '../forms/CompleteTaskForm';
 
 const TaskCard = ({ task, setFlashMessages }) => {
+  const [changeTime, setChangeTime] = useState(false);
+  const toggleChangeTime = (e) => {
+    setChangeTime(!changeTime);
+  }
   return (
     <div className="card mx-2 my-3">
       <h5 className="card-header">{task.type === 'dropoff' ? 'Dropoff' : 'Pickup'} for {task.task_date}</h5>
@@ -29,8 +34,19 @@ const TaskCard = ({ task, setFlashMessages }) => {
         <p className="card-text">User Notes: {task.logistics.notes}</p>
       </div>
       <hr className="divider" />
-      {!task.logistics.chosen_time && <SetTaskTimeForm task={task} setFlashMessages={setFlashMessages} />}
-      {task.logistics.chosen_time && <p className="card-text">put dt completed button here</p>}
+      {(!task.logistics.chosen_time || changeTime) && <SetTaskTimeForm task={task} setFlashMessages={setFlashMessages} />}
+      {(task.logistics.chosen_time && !changeTime) &&
+        <CompleteTaskForm task={task} setFlashMessages={setFlashMessages} />
+      }
+      {task.logistics.chosen_time &&
+        <button
+          type="button"
+          className="btn btn-outline-dark btn-sm"
+          onClick={toggleChangeTime}
+        >
+          {changeTime ? 'Hide Form' : `Change ${task.type == 'dropoff' ? 'Dropoff' : 'Pickup'} Time`}
+        </button>
+      }
     </div>
   );
 }
