@@ -8,7 +8,7 @@ const FormErrors = ({errors, color}) => {
     return (
       <div>
       {errors.map((error, index) => (
-        <p key={index} style={{"color": color}}>{error}</p>
+        <p key={index} style={{"color": color}} className="mt-2 mb-0">{error}</p>
       ))}
       </div>
     );
