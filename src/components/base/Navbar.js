@@ -10,7 +10,7 @@ const Navbar = ({ isLoggedIn }) => {
     <nav className="navbar navbar-expand-lg navbar-light hubbub-background">
       <div className="container-fluid">
         <a className="navbar-brand" href="/tasks">
-          <h2 className="text-start text-white">HUBBUB</h2>
+          <h2 className="text-start text-white">Operations</h2>
         </a>
         <button
           className="navbar-toggler"
