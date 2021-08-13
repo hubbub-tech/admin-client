@@ -24,7 +24,7 @@ const TaskCard = ({ task, setFlashMessages }) => {
             <ul className="list-group list-group-flush">
               {task.orders.map((order) => (
                 <li className="list-group-item" key={order.id}>
-                  #{order.item.id}, <a href={`https://www.hubbub.shop/inventory/i/id=${order.item.id}`}>{order.item.name}</a>
+                  #{order.item.id}, <a href={`https://www.hubbub.shop/inventory/i/id=${order.item.id}`}  target="_blank" rel="noreferrer">{order.item.name}</a>
                 </li>
               ))}
             </ul>
@@ -32,9 +32,13 @@ const TaskCard = ({ task, setFlashMessages }) => {
           <div className="col-sm-4"></div>
         </div>
         <p className="card-text">User Notes: {task.logistics.notes}</p>
+        <p className="card-text">Contact Email: {task.renter.email}</p>
+        <p className="card-text">Contact Phone: {task.renter.profile.phone}</p>
       </div>
       <hr className="divider" />
-      {(!task.logistics.chosen_time || changeTime) && <SetTaskTimeForm task={task} setFlashMessages={setFlashMessages} />}
+      {(!task.logistics.chosen_time || changeTime) &&
+        <SetTaskTimeForm task={task} setFlashMessages={setFlashMessages} />
+      }
       {(task.logistics.chosen_time && !changeTime) &&
         <CompleteTaskForm task={task} setFlashMessages={setFlashMessages} />
       }

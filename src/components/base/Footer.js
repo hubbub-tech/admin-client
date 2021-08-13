@@ -13,21 +13,21 @@ const Footer = () => {
             </a>
           </div>
           <div className="col-md-2 mb-md-0 mb-3">
-            <h5 className="text-uppercase text-white">Rent</h5>
+            <h5 className="text-uppercase text-white">Tasks</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="/inventory" target="_blank" rel="noreferrer">Inventory</a>
-              </li>
-              <li>
-                <a href="/checkout">My Cart</a>
+                <a href="/tasks">Task Dashboard</a>
               </li>
             </ul>
           </div>
           <div className="col-md-2 mb-md-0 mb-3">
-            <h5 className="text-uppercase text-white">List</h5>
+            <h5 className="text-uppercase text-white">Controls</h5>
             <ul className="list-unstyled">
               <li>
-                <p className="text-hubbub">Coming Soon!</p>
+                <a href="/orders">Order Dashboard</a>
+              </li>
+              <li>
+                <a href="/items">Item Dashboard</a>
               </li>
             </ul>
           </div>
@@ -35,7 +35,7 @@ const Footer = () => {
             <h5 className="text-uppercase text-white">About</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="/story">Our Story</a>
+                <a href="https://www.hubbub.shop/story">Our Story</a>
               </li>
               <li>
                 <a href="mailto:hubbubcu@gmail.com">Contact Us</a>
@@ -52,7 +52,7 @@ const Footer = () => {
             <h5 className="text-uppercase text-white">Help</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="/faqs">FAQs</a>
+                <a href="https://www.hubbub.shop/faqs">FAQs</a>
               </li>
               <li>
                 <a href="https://docs.google.com/document/d/1rRKafml--o5q6L3HA8EtFHCedQTncR8rUZhAeVsEqfI/edit?usp=sharing" target="_blank" rel="noreferrer">Community Guidelines</a>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import TaskCard from '../cards/TaskCard';
+import MiniTaskCard from '../cards/MiniTaskCard';
 import TaskFilter from '../filters/TaskFilter';
 
 const TasksDashboard = ({ flashMessages, setFlashMessages }) => {
@@ -38,12 +38,19 @@ const TasksDashboard = ({ flashMessages, setFlashMessages }) => {
               </div>
               <div className="col-sm-9">
               {filteredTasks.map((task)  => (
-                <TaskCard
+                <MiniTaskCard
                   key={`${task.type}-${task.task_date}-${task.renter.id}`}
                   setFlashMessages={setFlashMessages}
                   task={task}
                 />
               ))}
+              {filteredTasks.length === 0 &&
+                <div className="col my-5">
+                  <p className="text-center">
+                    No tasks available. Check back later!
+                  </p>
+                </div>
+              }
               </div>
             </div>
           </div>
