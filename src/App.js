@@ -45,7 +45,7 @@ const App = () => {
           <TaskSummary flashMessages={flashMessages} setFlashMessages={setFlashMessages} />
         </Route>
         <Route exact path="/commands">
-          <CommandPortal />
+          <CommandPortal setFlashMessages={setFlashMessages} />
         </Route>
         <Route>
           <Error404 setFlashMessages={setFlashMessages }/>

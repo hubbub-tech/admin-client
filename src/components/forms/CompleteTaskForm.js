@@ -35,7 +35,7 @@ const CompleteTaskForm = ({ task, setFlashMessages }) => {
       <div className="row my-0">
         <p className="card-text fw-bolder">Has this {task.type === 'dropoff' ? 'Dropoff' : 'Pickup'} task been completed?</p>
         <div className="col-12">
-          <div class="input-group mb-3">
+          <div className="input-group mb-3">
             <input
               type="text"
               className="form-control"

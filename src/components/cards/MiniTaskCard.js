@@ -6,7 +6,7 @@ const MiniTaskCard = ({ task, setFlashMessages }) => {
     <div className="card mx-2 my-3">
       <h5 className="card-header">
         <span>{task.type === 'dropoff' ? 'Dropoff' : 'Pickup'} for {task.task_date}</span>
-        {task.logistics.chosen_time && <span class="badge bg-success mx-2">Time Chosen</span>}
+        {task.logistics.chosen_time && <span className="badge bg-success mx-2">Time Chosen</span>}
       </h5>
       <div className="card-body">
         <h5 className="card-title">
@@ -29,8 +29,8 @@ const MiniTaskCard = ({ task, setFlashMessages }) => {
         <p className="card-text">User Notes: {task.logistics.notes}</p>
       </div>
       <hr className="divider" />
-      <div class="card-body">
-        <div class="d-grid gap-2">
+      <div className="card-body">
+        <div className="d-grid gap-2">
           <a
             href={`/task/${task.type}/id=${task.orders[0].id}`}
             className="btn btn-hubbub"

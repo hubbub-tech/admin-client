@@ -1,6 +1,9 @@
 import React from 'react';
 
-const CommandPortal = () => {
+import DropoffReminder from '../commands/DropoffReminder';
+import PickupReminder from '../commands/PickupReminder';
+
+const CommandPortal = ({ setFlashMessages }) => {
   return (
     <main>
       <div className="container-md my-5">
@@ -13,13 +16,8 @@ const CommandPortal = () => {
               <hr />
             </div>
             <div className="row">
-              <div className="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    This is some text within a card body.
-                  </div>
-                </div>
-              </div>
+              <DropoffReminder setFlashMessages={setFlashMessages} />
+              <PickupReminder setFlashMessages={setFlashMessages} />
             </div>
           </div>
           <div className="col-sm-1"></div>
