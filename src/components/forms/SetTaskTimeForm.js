@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 
 import ValidTimeInput from '../inputs/ValidTimeInput';
@@ -12,9 +13,11 @@ const SetTaskTimeForm = ({ task, setFlashMessages }) => {
   }
   const submit = (e) => {
     e.preventDefault();
+    const hubbubId = Cookies.get('hubbubId');
+    const hubbubToken = Cookies.get('hubbubToken');
     fetch(process.env.REACT_APP_SERVER + '/task/chosen-time', {
       method: 'POST',
-      body: JSON.stringify({ task, chosenTime }),
+      body: JSON.stringify({ hubbubId, hubbubToken, task, chosenTime }),
       headers: { 'Content-Type': 'application/json' }
     })
     .then(isStatusOK)
