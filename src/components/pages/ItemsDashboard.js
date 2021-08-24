@@ -7,7 +7,9 @@ const ItemsDashboard = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER + '/items')
+    fetch(process.env.REACT_APP_SERVER + '/items', {
+      credentials: 'include'
+    })
     .then(res => res.json())
     .then(data => setItems(data.items));
   }, []);

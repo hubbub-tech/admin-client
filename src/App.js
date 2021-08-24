@@ -7,6 +7,8 @@ import Navbar from './components/base/Navbar';
 import Flash from './components/base/Flash';
 import Footer from './components/base/Footer';
 
+import Login from './components/pages/Login';
+import Logout from './components/requests/Logout';
 import OrdersDashboard from './components/pages/OrdersDashboard';
 import OrderSummary from './components/pages/OrderSummary';
 import TasksDashboard from './components/pages/TasksDashboard';
@@ -30,22 +32,35 @@ const App = () => {
           <Redirect to="/tasks" />
         </Route>
         <Route exact path="/orders">
-          <OrdersDashboard />
+          {isLoggedIn && <OrdersDashboard />}
+          {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route exact path="/items">
-          <ItemsDashboard />
+          {isLoggedIn && <ItemsDashboard />}
+          {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route exact path="/order/summary/id=:orderId">
-          <OrderSummary setFlashMessages={setFlashMessages} />
+          {isLoggedIn && <OrderSummary setFlashMessages={setFlashMessages} />}
+          {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route exact path="/tasks">
           <TasksDashboard flashMessages={flashMessages} setFlashMessages={setFlashMessages} />
         </Route>
         <Route exact path="/task/:taskType/id=:orderId">
-          <TaskSummary flashMessages={flashMessages} setFlashMessages={setFlashMessages} />
+          {isLoggedIn && <TaskSummary flashMessages={flashMessages} setFlashMessages={setFlashMessages} />}
+          {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route exact path="/commands">
-          <CommandPortal setFlashMessages={setFlashMessages} />
+          {isLoggedIn && <CommandPortal setFlashMessages={setFlashMessages} />}
+          {!isLoggedIn && <Redirect to='/login' />}
+        </Route>
+        <Route exact path="/login">
+          {!isLoggedIn && <Login setFlashMessages={setFlashMessages} />}
+          {isLoggedIn && <Redirect to='/' />}
+        </Route>
+        <Route exact path="/logout">
+          {isLoggedIn && <Logout setFlashMessages={setFlashMessages} />}
+          {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route>
           <Error404 setFlashMessages={setFlashMessages }/>

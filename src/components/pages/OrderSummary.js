@@ -22,7 +22,9 @@ const OrderSummary = ({ setFlashMessages }) => {
   const [urlBase, setUrlBase] = useState(null);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER + `/order/summary/id=${orderId}`)
+    fetch(process.env.REACT_APP_SERVER + `/order/summary/id=${orderId}`, {
+      credentials: 'include'
+    })
     .then(res => res.json())
     .then(data => {
       setOrder(data.order);

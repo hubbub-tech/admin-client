@@ -11,7 +11,9 @@ const EditItemAddress = ({ setFlashMessages }) => {
   const addressDisplay = `${item.address.num} ${item.address.street} ${item.address.apt !== '' ? `Apt ${item.address.apt}` : ''}, ${item.address.city}, ${item.address.state} ${item.address.zip_code}`;
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER + `/item/id=${itemId}`)
+    fetch(process.env.REACT_APP_SERVER + `/item/id=${itemId}`, {
+      credentials: 'include'
+    })
     .then(res => res.json())
     .then(data => setItem(data.item));
   }, []);

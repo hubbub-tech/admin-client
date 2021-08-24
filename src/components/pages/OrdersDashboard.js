@@ -7,7 +7,9 @@ const OrdersDashboard = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER + '/orders')
+    fetch(process.env.REACT_APP_SERVER + '/orders', {
+      credentials: 'include'
+    })
     .then(res => res.json())
     .then(data => setOrders(data.orders));
   }, []);
