@@ -6,13 +6,13 @@ const AddressForm = ({ address, setAddress, required = false }) => {
       <div className="col-md">
         <div className="form-floating mb-3">
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="addressNum"
             name="addressNum"
             onChange={e => setAddress({ ...address, num: e.target.value })}
-            minLength="1"
-            maxLength="49"
+            min="0"
+            maxLength="100000"
             required={required}
           />
         <label htmlFor="addressNum">House Number</label>
@@ -25,7 +25,7 @@ const AddressForm = ({ address, setAddress, required = false }) => {
             name="addressStreet"
             onChange={e => setAddress({ ...address, street: e.target.value })}
             minLength="1"
-            maxLength="49"
+            maxLength="90"
             required={required}
           />
         <label htmlFor="addressStreet">Street Name</label>
@@ -40,7 +40,7 @@ const AddressForm = ({ address, setAddress, required = false }) => {
             name="addressApt"
             onChange={e => setAddress({ ...address, apt: e.target.value })}
             minLength="1"
-            maxLength="49"
+            maxLength="19"
           />
           <label htmlFor="addressApt">Apartment</label>
         </div>
@@ -48,11 +48,11 @@ const AddressForm = ({ address, setAddress, required = false }) => {
           <input
             type="text"
             className="form-control"
-            id="addressZip"
-            name="addressZip"
-            onChange={e => setAddress({ ...address, zip: e.target.value })}
+            id="addressZipCode"
+            name="addressZipCode"
+            onChange={e => setAddress({ ...address, zip_code: e.target.value })}
             minLength="1"
-            maxLength="49"
+            maxLength="9"
             required={required}
           />
           <label htmlFor="addressZip">Zip Code</label>

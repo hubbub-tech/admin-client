@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -30,9 +31,11 @@ const EditAddressForm = ({ item, setFlashMessages }) => {
 
   const submit = (e) => {
     e.preventDefault();
+    const hubbubId = Cookies.get('hubbubId');
+    const hubbubToken = Cookies.get('hubbubToken');
     fetch(process.env.REACT_APP_SERVER + `/item/address/id=${item.id}/submit`, {
       method: 'POST',
-      body: JSON.stringify({ address }),
+      body: JSON.stringify({ hubbubId, hubbubToken, address }),
       headers: { 'Content-Type': 'application/json' },
     })
     .then(isStatusOK)
