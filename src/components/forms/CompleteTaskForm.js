@@ -53,7 +53,9 @@ const CompleteTaskForm = ({ task, setFlashMessages }) => {
         <p className="card-text fw-bolder">Has this {task.type === 'dropoff' ? 'Dropoff' : 'Pickup'} task been completed?</p>
         <div className="col-12">
           <form onSubmit={submit} >
-            <AddressForm address={address} setAddress={setAddress} required={true} />
+            {task.type === 'pickup' &&
+              <AddressForm address={address} setAddress={setAddress} required={true} />
+            }
             <div className="input-group mb-3">
               <input
                 type="text"
