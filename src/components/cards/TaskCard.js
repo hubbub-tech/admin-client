@@ -16,7 +16,7 @@ const TaskCard = ({ task, setFlashMessages }) => {
         <h5 className="card-title">Renter Name: {task.renter.name}</h5>
         <h6 className="card-subtitle">
           <span>{task.type === 'dropoff' ? 'Dropoff' : 'Pickup'} Address: </span>
-          <span>{task.address.street}, {task.address.city} {task.address.zip_code}</span>
+          <span>{task.address.num} {task.address.street}, {task.address.city} {task.address.zip_code}</span>
         </h6>
         <div className="row">
           <div className="col-sm-8">

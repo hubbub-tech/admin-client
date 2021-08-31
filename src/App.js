@@ -44,7 +44,8 @@ const App = () => {
           {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route exact path="/tasks">
-          <TasksDashboard flashMessages={flashMessages} setFlashMessages={setFlashMessages} />
+          {isLoggedIn && <TasksDashboard flashMessages={flashMessages} setFlashMessages={setFlashMessages} />}
+          {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route exact path="/task/:taskType/id=:orderId">
           {isLoggedIn && <TaskSummary flashMessages={flashMessages} setFlashMessages={setFlashMessages} />}

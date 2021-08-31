@@ -9,7 +9,9 @@ const TasksDashboard = ({ flashMessages, setFlashMessages }) => {
   const [filteredTasks, setFilteredTasks] = useState([]);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER + '/tasks')
+    fetch(process.env.REACT_APP_SERVER + '/tasks', {
+      credentials: 'include'
+    })
     .then(res => res.json())
     .then(data => {
       setTasks(data.tasks);

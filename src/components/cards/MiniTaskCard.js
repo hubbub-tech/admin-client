@@ -11,8 +11,9 @@ const MiniTaskCard = ({ task, setFlashMessages }) => {
       <div className="card-body">
         <h5 className="card-title">
           <span>{task.type === 'dropoff' ? 'Dropoff' : 'Pickup'} Address: </span>
-          <span>{task.address.street}, {task.address.city} {task.address.zip_code}</span>
+          <span>{task.address.num} {task.address.street}, {task.address.city} {task.address.zip_code}</span>
         </h5>
+        <h5 className="card-title">Renter: {task.renter.name}</h5>
         <div className="row">
           <div className="col-sm-8">
             <h6 className="card-text mt-2">Item(s): </h6>
