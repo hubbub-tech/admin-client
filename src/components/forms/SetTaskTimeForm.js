@@ -2,6 +2,7 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 
+import TimeInput from '../inputs/TimeInput';
 import ValidTimeInput from '../inputs/ValidTimeInput';
 
 const SetTaskTimeForm = ({ task, setFlashMessages }) => {
@@ -30,11 +31,10 @@ const SetTaskTimeForm = ({ task, setFlashMessages }) => {
       <div className="row my-0">
         <p className="card-text fw-bolder">Choose a {task.type === 'dropoff' ? 'Dropoff' : 'Pickup'} Time</p>
         <div className="col-sm-5">
-          <ValidTimeInput
+          <TimeInput
             onSubmit={submit}
             chosenTime={chosenTime}
             setChosenTime={setChosenTime}
-            validTimeslots={task.logistics.timeslots}
           />
         </div>
         <div className="col-sm-7">
