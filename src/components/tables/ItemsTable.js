@@ -6,7 +6,7 @@ import { sortList } from '../../utils.js';
 const ItemsTable = ({ items, setItems }) => {
   const history = useHistory();
   const handleOnClick = (itemId) => {
-    history.push(`/items/history/id=${itemId}`);
+    history.push(`/item/history/id=${itemId}`);
   }
 
   const sortItems = (key) => {

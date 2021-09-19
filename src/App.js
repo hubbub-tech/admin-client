@@ -14,6 +14,7 @@ import OrderSummary from './components/pages/OrderSummary';
 import TasksDashboard from './components/pages/TasksDashboard';
 import TaskSummary from './components/pages/TaskSummary';
 import ItemsDashboard from './components/pages/ItemsDashboard';
+import ItemHistory from './components/pages/ItemHistory';
 import CommandPortal from './components/pages/CommandPortal';
 
 import Error404 from './components/static/Error404';
@@ -37,6 +38,10 @@ const App = () => {
         </Route>
         <Route exact path="/items">
           {isLoggedIn && <ItemsDashboard />}
+          {!isLoggedIn && <Redirect to='/login' />}
+        </Route>
+        <Route exact path="/item/history/id=:itemId">
+          {isLoggedIn && <ItemHistory setFlashMessages={setFlashMessages} />}
           {!isLoggedIn && <Redirect to='/login' />}
         </Route>
         <Route exact path="/order/summary/id=:orderId">
