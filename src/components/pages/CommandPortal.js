@@ -2,6 +2,7 @@ import React from 'react';
 
 import DropoffReminder from '../commands/DropoffReminder';
 import PickupReminder from '../commands/PickupReminder';
+import ShoppingReminder from '../commands/ShoppingReminder';
 
 const CommandPortal = ({ setFlashMessages }) => {
   return (
@@ -18,6 +19,7 @@ const CommandPortal = ({ setFlashMessages }) => {
             <div className="row">
               <DropoffReminder setFlashMessages={setFlashMessages} />
               <PickupReminder setFlashMessages={setFlashMessages} />
+              <ShoppingReminder setFlashMessages={setFlashMessages} />
             </div>
           </div>
           <div className="col-sm-1"></div>
