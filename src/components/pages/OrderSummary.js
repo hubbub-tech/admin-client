@@ -37,10 +37,6 @@ const OrderSummary = ({ setFlashMessages }) => {
         <div className="row">
           <div className="col-sm-1"></div>
           <div className="col-sm-10">
-            <h2 className="text-start">{ order.renter.name }</h2>
-            <p className="text-start fs-4 mb-5">Rental of
-              <Link to={`/item/history/id=${order.item.id}`}> {order.item.name}</Link>
-            </p>
             <div className="row">
               <div className="col-sm-4 mb-3">
                 <img
@@ -50,22 +46,14 @@ const OrderSummary = ({ setFlashMessages }) => {
                 />
               </div>
               <div className="col-sm-8 mb-3">
-                <div className="card mb-3">
-                  <div className="card-body">
-                    <p className="text-start fs-5 fw-bold">Description</p>
-                    <p className="text-start">{ order.item.details.description }</p>
-                    <p className="text-start fs-5 fw-bold mt-2">Original Rental Period</p>
-                    <p className="text-start">{ order.res_date_start } to { order.res_date_end }</p>
-                    <p className="text-start fs-5 fw-bold mt-2">Is Extended:
-                      <span className="text-hubbub">
-                        {order.res_date_end !== order.ext_date_end ? ' Yes': ' No'}
-                      </span>
-                    </p>
-                    {order.res_date_end !== order.ext_date_end &&
-                      <p className="text-start">Extended to { order.ext_date_end }</p>
-                    }
-                  </div>
-                </div>
+                <p className="text-start fs-5 fw-bold">Rental Period</p>
+                <p className="text-start my-1">Start { order.res_date_start }</p>
+                <p className="text-start my-1">End { order.res_date_end }</p>
+                <p className="text-start fs-5 fw-bold mt-2">Description</p>
+                <p className="text-start">{ order.item.details.description }</p>
+                {order.res_date_end !== order.ext_date_end &&
+                  <p className="text-start">Extended to { order.ext_date_end }</p>
+                }
               </div>
             </div>
           </div>
