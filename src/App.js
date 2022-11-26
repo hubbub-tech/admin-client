@@ -1,80 +1,58 @@
-import React from 'react';
-import Cookies from 'js-cookie';
-import { useState, useEffect } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import React, { useContext } from 'react';
 
-import Navbar from './components/base/Navbar';
-import Flash from './components/base/Flash';
-import Footer from './components/base/Footer';
+import {
+  Route,
+  Outlet,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements
+} from 'react-router-dom';
 
-import Login from './components/pages/Login';
-import Logout from './components/requests/Logout';
-import OrdersDashboard from './components/pages/OrdersDashboard';
-import OrderSummary from './components/pages/OrderSummary';
-import TasksDashboard from './components/pages/TasksDashboard';
-import TaskSummary from './components/pages/TaskSummary';
-import ItemsDashboard from './components/pages/ItemsDashboard';
-import ItemHistory from './components/pages/ItemHistory';
-import CommandPortal from './components/pages/CommandPortal';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
-import Error404 from './components/static/Error404';
+import { FlashProvider } from './providers/FlashProvider';
+import { SessionContext, SessionProvider } from './providers/SessionProvider';
 
-const App = () => {
-  const hubbubId = Cookies.get('hubbubId');
-  const hubbubToken = Cookies.get('hubbubToken');
-  const isLoggedIn = hubbubId !== undefined && hubbubToken !== undefined;
-  const [flashMessages, setFlashMessages] = useState([]);
+import { Navbar } from './base/Navbar';
+
+import { Index as Login } from './views/auth/login';
+import { PageNotFound } from './views/errors/E404';
+
+import { useAnalytics } from './hooks/Analytics';
+import { useCredentials } from './hooks/Credentials';
+
+
+const AppProviderLayout = () => {
+
+  const { courierId } = useContext(SessionContext);
+  useAnalytics(courierId);
+
   return (
-    <div className="App">
-      <Navbar isLoggedIn={isLoggedIn} />
-      <Flash flashMessages={flashMessages} setFlashMessages={setFlashMessages} />
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/tasks" />
-        </Route>
-        <Route exact path="/orders">
-          {isLoggedIn && <OrdersDashboard />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route exact path="/items">
-          {isLoggedIn && <ItemsDashboard />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route exact path="/item/history/id=:itemId">
-          {isLoggedIn && <ItemHistory setFlashMessages={setFlashMessages} />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route exact path="/order/summary/id=:orderId">
-          {isLoggedIn && <OrderSummary setFlashMessages={setFlashMessages} />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route exact path="/tasks">
-          {isLoggedIn && <TasksDashboard flashMessages={flashMessages} setFlashMessages={setFlashMessages} />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route exact path="/task/:taskType/id=:orderId">
-          {isLoggedIn && <TaskSummary flashMessages={flashMessages} setFlashMessages={setFlashMessages} />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route exact path="/commands">
-          {isLoggedIn && <CommandPortal setFlashMessages={setFlashMessages} />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route exact path="/login">
-          {!isLoggedIn && <Login setFlashMessages={setFlashMessages} />}
-          {isLoggedIn && <Redirect to='/' />}
-        </Route>
-        <Route exact path="/logout">
-          {isLoggedIn && <Logout setFlashMessages={setFlashMessages} />}
-          {!isLoggedIn && <Redirect to='/login' />}
-        </Route>
-        <Route>
-          <Error404 setFlashMessages={setFlashMessages }/>
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
+    <GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_RECAPTCHA_API_KEY}>
+      <SessionProvider>
+        <div className="App">
+          <Navbar />
+          <FlashProvider>
+
+            <Outlet />
+
+          </FlashProvider>
+        </div>
+      </SessionProvider>
+    </GoogleReCaptchaProvider>
   );
 }
 
-export default App;
+
+const routes = createRoutesFromElements(
+  <Route element={<AppProviderLayout />} errorElement={<PageNotFound />}>
+
+    <Route exact path="/login" element={<Login />} />
+
+  </Route>
+);
+
+
+const router = createBrowserRouter(routes);
+
+export const App = () => <RouterProvider router={router} />
