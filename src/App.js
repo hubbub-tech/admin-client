@@ -16,6 +16,7 @@ import { SessionContext, SessionProvider } from './providers/SessionProvider';
 import { Navbar } from './base/Navbar';
 
 import { Index as Login } from './views/auth/login';
+import { Index as TasksFeed } from './views/tasks/feed';
 import { PageNotFound } from './views/errors/E404';
 
 import { useAnalytics } from './hooks/Analytics';
@@ -48,6 +49,8 @@ const routes = createRoutesFromElements(
   <Route element={<AppProviderLayout />} errorElement={<PageNotFound />}>
 
     <Route exact path="/login" element={<Login />} />
+
+    <Route exact path="/tasks/feed" element={<TasksFeed />} />
 
   </Route>
 );

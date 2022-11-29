@@ -25,10 +25,6 @@ const TasksDashboard = ({ flashMessages, setFlashMessages }) => {
           <div className="col-sm-1"></div>
           <div className="col-sm-10">
             <div className="row">
-              <h1>Tasks</h1>
-              <p>The queue of deliveries that need to be made.</p>
-              <p>Once a task is completed, select "More Info" then mark as "completed".</p>
-              <hr />
             </div>
             <div className="row">
               <div className="col-sm-3">
