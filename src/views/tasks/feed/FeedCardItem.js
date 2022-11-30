@@ -12,14 +12,14 @@ export const FeedCardItem = ({ order }) => {
       {(viewport.width > 500) &&
         <TaskItemPhoto
           href={`/item/${order.item_id}`}
-          src={order.item_image_url}
+          src={order.item.image_url}
           className="img-fluid"
-          alt={order.item_name}
+          alt={order.item.name}
         />
       }
       </div>
       <div className="col-11">
-        <small>{ order.item_name }</small>
+        <small>{ order.item.name }</small>
       </div>
     </div>
   );

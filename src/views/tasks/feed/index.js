@@ -11,11 +11,14 @@ export const Index = () => {
 
   const defaultOrder = { item: {} };
   const defaultCourier = {};
+  const defaultTimeslot = {};
+
   const defaultTask = {
     orders: [defaultOrder],
     couriers: [defaultCourier],
+    timeslots: [defaultTimeslot],
     sender: {},
-    receiver: {}
+    receiver: {},
   };
   const [tasks, setTasks] = useState([defaultTask])
   const [feedTasks, setFeedTasks] = useState([defaultTask])
@@ -73,7 +76,7 @@ export const Index = () => {
 
 
   const handleOrderByProximity = (type) => {
-    const orderByFromProximity = (a, b) => {
+    const orderByProximity = (a, b) => {
 
       let aLat, aLng, bLat, bLng;
       if (type === 'fromProximity') {
@@ -99,7 +102,9 @@ export const Index = () => {
       return (distToA > distToB)
         ? 1
         : (distToA === distToB && a.is_featured && b.is_featured === false) ? 1 : -1;
-    }
+    };
+
+    setFeedTasks([...feedTasks].sort(orderByProximity));
   };
 
   useEffect(() => {
@@ -117,7 +122,7 @@ export const Index = () => {
               <FeedBanner />
             </div>
           </div>
-
+          <hr/>
           <div className="row">
             <div className="col-lg-4 col-md-6 col-12">
               <FeedSortOptions

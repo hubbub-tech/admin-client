@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5, h6
   animation: animateText 20000ms linear infinite;
 }
 
+.bg-danger-light {
+  background-color: #e66877;
+}
+
 @keyframes animateText {
   0% {
     color: #69b6e7;
