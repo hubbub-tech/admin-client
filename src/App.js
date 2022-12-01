@@ -13,10 +13,12 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { FlashProvider } from './providers/FlashProvider';
 import { SessionContext, SessionProvider } from './providers/SessionProvider';
 
-import { Navbar } from './base/Navbar';
+import { Index as Navbar } from './base/navbar';
 
 import { Index as Login } from './views/auth/login';
-import { Index as TasksFeed } from './views/tasks/feed';
+import { Index as TaskDetails } from './views/tasks/details';
+import { Index as TaskFeed } from './views/tasks/feed';
+
 import { PageNotFound } from './views/errors/E404';
 
 import { useAnalytics } from './hooks/Analytics';
@@ -50,7 +52,9 @@ const routes = createRoutesFromElements(
 
     <Route exact path="/login" element={<Login />} />
 
-    <Route exact path="/tasks/feed" element={<TasksFeed />} />
+    <Route exact path="/tasks/feed" loader={useCredentials} element={<TaskFeed />} />
+
+    <Route exact path="/task/:taskId" element={<TaskDetails />} />
 
   </Route>
 );
