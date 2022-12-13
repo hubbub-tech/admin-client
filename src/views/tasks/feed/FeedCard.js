@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { FeedCardItem } from './FeedCardItem';
+import { FeedTaskDetailsButton } from './FeedTaskDetailsButton';
 
 import { printDate } from '../../utils.js';
 
@@ -24,11 +25,7 @@ export const FeedCard = ({ task }) => {
       setCardHeaderText("Incomplete");
       setHeaderCardClassName("card-header bg-danger-light text-white fw-bold");
 
-      let dueDate = (task.timeslots[0])
-        ? printDate(task.timeslots[0].dt_range_start)
-        : "<No Timeslots Requested>"
-
-      setCardBodyTitle(`Due to ${task.receiver.name} on ${ dueDate }`)
+      setCardBodyTitle(`Due to ${task.receiver.name} on ${ printDate(task.dt_due) }`)
     }
   }, [task]);
 
@@ -43,15 +40,15 @@ export const FeedCard = ({ task }) => {
           {cardBodyTitle ? cardBodyTitle : <Skeleton />}
           </h2>
           <small className="text-muted mb-3">From: {task.sender.name}</small>
-          <div className="d-grid col-lg-10 col-md-8 col-9">
+          <div className="d-grid col-lg-9 col-md-8 col-12">
             <table className="table table-borderless table-sm">
               <tr>
                 <th scope="row">From</th>
-                <td className="fs-6">{ task.from_addr_formatted }</td>
+                <td><small>{ task.from_addr_formatted }</small></td>
               </tr>
               <tr>
                 <th scope="row">To</th>
-                <td className="fs-6">{ task.to_addr_formatted }</td>
+                <td><small>{ task.to_addr_formatted }</small></td>
               </tr>
             </table>
             <small className="text-muted mb-2">Notes: { task.notes ? task.notes : 'No notes provided.' }</small>
@@ -60,9 +57,8 @@ export const FeedCard = ({ task }) => {
               <FeedCardItem key={order.id} order={order} />
             ))}
           </div>
-          <div className="col-lg-2 col-md-4 col-3">
-            <h3 className="me-2 mb-3 fs-6 fw-bold d-flex justify-content-end">Options</h3>
-            {/*(dateToday < dtStarted) && <RentalsCancelLogisticsButton logisticsId={dropoff.id} />*/}
+          <div className="col-lg-3 col-md-4 col-12">
+            <FeedTaskDetailsButton taskId={task.id} />
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { FlashContext } from '../../../providers/FlashProvider';
 import { CoordsAutoInput } from '../../../inputs/lookup-address';
 
+import { FeedShowExpiredButton } from './FeedShowExpiredButton';
 import { FeedSortOptions } from './FeedSortOptions';
 import { FeedBanner } from './FeedBanner';
 import { FeedGrid } from './FeedGrid';
@@ -20,8 +21,9 @@ export const Index = () => {
     sender: {},
     receiver: {},
   };
-  const [tasks, setTasks] = useState([defaultTask])
-  const [feedTasks, setFeedTasks] = useState([defaultTask])
+  const [tasks, setTasks] = useState([defaultTask]);
+  const [feedTasks, setFeedTasks] = useState([defaultTask]);
+  const [expiredTasks, setExpiredTasks] = useState([defaultTask]);
 
   const defaultCoords = { "lat": undefined, "lng": undefined };
   const [coords, setCoords ] = useState(defaultCoords);
@@ -29,7 +31,20 @@ export const Index = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [showExpired, setShowExpired] = useState(false);
+
   useEffect(() => {
+    const liveTaskOnly = (task) => {
+      const dateDue = new Date(task.dt_due * 1000);
+      const dateToday = new Date();
+      return dateDue > dateToday;
+    };
+
+    const expiredTaskOnly = (task) => {
+      const dateDue = new Date(task.dt_due * 1000);
+      const dateToday = new Date();
+      return dateDue <= dateToday;
+    };
 
     const getData = async(url) => {
       const response = await fetch(url, { mode: 'cors', credentials: 'include' });
@@ -38,7 +53,9 @@ export const Index = () => {
       const data = await responseClone.json();
 
       setTasks(data.tasks);
-      setFeedTasks(data.tasks);
+
+      setFeedTasks(data.tasks.filter(liveTaskOnly));
+      setExpiredTasks(data.tasks.filter(expiredTaskOnly));
       setIsLoading(false);
       return response;
     }
@@ -60,7 +77,9 @@ export const Index = () => {
       if (cachedResponse) {
         const cachedData = await cachedResponse.json();
         setTasks(cachedData.tasks);
-        setFeedTasks(cachedData.tasks);
+
+        setFeedTasks(cachedData.tasks.filter(liveTaskOnly));
+        setExpiredTasks(cachedData.tasks.filter(expiredTaskOnly));
         setIsLoading(false);
       } else {
         getData(process.env.REACT_APP_SERVER + `/tasks/feed`)
@@ -72,6 +91,8 @@ export const Index = () => {
     setIsLoading(true);
     getCachedData(process.env.REACT_APP_SERVER + '/tasks/feed')
     .catch(console.error);
+
+    console.log({ feedTasks, expiredTasks, tasks })
   }, []);
 
 
@@ -138,12 +159,17 @@ export const Index = () => {
               </div>
             </div>
           }
-          <div className="row">
+          <div className="row my-3">
             <div className="col-md-6 col-12 mb-md-5 me-auto">
               <FeedGrid tasks={feedTasks} isLoading={isLoading} />
+              <div className="d-grid gap-2 my-3">
+                <FeedShowExpiredButton showExpired={showExpired} setShowExpired={setShowExpired} />
+              </div>
+              {showExpired && <FeedGrid tasks={expiredTasks} isLoading={isLoading} />}
             </div>
           </div>
         </div>
+
       </section>
     </main>
   );

@@ -5,6 +5,8 @@ import { DetailsItem } from './DetailsItem';
 import { DetailsActionCard } from './DetailsActionCard';
 import { DetailsRouteMap } from './DetailsRouteMap';
 
+import { printDate } from '../../utils.js';
+
 import { SessionContext } from '../../../providers/SessionProvider';
 import { FlashContext } from '../../../providers/FlashProvider';
 
@@ -25,6 +27,8 @@ export const Index = () => {
   const [timeslots, setTimeslots] = useState([]);
   const [couriers, setCouriers] = useState([]);
 
+  const [schedEta, setSchedEta] = useState("Loading...");
+
   useEffect(() => {
 
     const getData = async(url) => {
@@ -41,7 +45,13 @@ export const Index = () => {
       setCouriers(data.couriers);
       setTimeslots(data.timeslots);
 
-      console.log(data.task)
+      if (data.task.dt_sched_eta) {
+        let dtSchedEta = new Date(data.task.dt_sched_eta) * 1000;
+        let schedLabel = printDate(dtSchedEta / 1000, "PP h:mm aaa");
+        setSchedEta("You set task time to " + schedLabel);
+      } else {
+        setSchedEta(" Please set a task time.");
+      }
     };
 
     getData(process.env.REACT_APP_SERVER + `/task/${taskId}`)
@@ -57,6 +67,7 @@ export const Index = () => {
               <h1>Task (id: {task.id})</h1>
               <p>Specialized management for tasks with all the details you need.</p>
               <p>Chose a time for dropoff/pickup. Then when the task is complete, confirm here.</p>
+              <p>{ schedEta }</p>
             </div>
           </div>
           <hr/>
@@ -65,7 +76,7 @@ export const Index = () => {
             <div className="col-sm-10">
               <div className="row mb-3">
                 <div className="col-sm-6 col-12">
-                  <DetailsActionCard />
+                  <DetailsActionCard taskId={task.id} dtDue={task.dt_due} timeslots={timeslots} />
                   <p className="fw-bold mt-3">Route</p>
                   <p>From: { task.from_addr_formatted }</p>
                   <p>To: { task.to_addr_formatted }</p>

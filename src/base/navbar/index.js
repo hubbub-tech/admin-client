@@ -46,7 +46,7 @@ export const Index = () => {
   return (
     <nav className="navbar navbar-expand-lg hubbub-background">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/tasks">
+        <a className="navbar-brand" href="/tasks/feed">
           <h2 className="text-start text-white">Operations</h2>
         </a>
 
