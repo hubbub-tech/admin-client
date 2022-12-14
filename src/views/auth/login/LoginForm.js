@@ -42,7 +42,7 @@ export const LoginForm = () => {
       Cookies.set('courierId', data.courier_id, configs);
       Cookies.set('courierSessionToken', data.courier_session_token, configs);
 
-      navigate('/');
+      navigate('/tasks/feed');
     };
   }
 
