@@ -6,10 +6,6 @@ export const DetailsCompleteCard = ({ taskId, dtDue, timeslots }) => {
 
   const [taskTimeSubtitle, setTaskTimeSubtitle] = useState("Done!");
 
-    postData(process.env.REACT_APP_SERVER + '/task/set-time')
-    .catch(console.error);
-  }
-
   useEffect(() => {
     setIsDisabled(timeSched ? false : true);
   }, [timeSched]);
