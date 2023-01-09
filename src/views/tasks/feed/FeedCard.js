@@ -20,12 +20,17 @@ export const FeedCard = ({ task }) => {
       setCardHeaderText("Completed");
       setHeaderCardClassName("card-header bg-white text-success fw-bold");
 
-      setCardBodyTitle(`Received by ${task.receiver.name} on ${ printDate(task.dt_received) }`)
+      setCardBodyTitle(`Received by ${task.receiver.name} on ${ printDate(task.dt_received) }`);
+    } else if (task.dt_sched_eta) {
+      setCardHeaderText("Pending");
+      setHeaderCardClassName("card-header bg-warning text-white fw-bold");
+    
+      setCardBodyTitle(`Scheduled for ${task.receiver.name} to receive on ${ printDate(task.dt_sched_eta) }`);
     } else {
       setCardHeaderText("Incomplete");
       setHeaderCardClassName("card-header bg-danger-light text-white fw-bold");
 
-      setCardBodyTitle(`Due to ${task.receiver.name} on ${ printDate(task.dt_due) }`)
+      setCardBodyTitle(`Due to ${task.receiver.name} on ${ printDate(task.dt_due) }`);
     }
   }, [task]);
 
@@ -53,7 +58,7 @@ export const FeedCard = ({ task }) => {
             </table>
             <small className="text-muted mb-2">Notes: { task.notes ? task.notes : 'No notes provided.' }</small>
             <small className="mb-1 fw-bold">Items:</small>
-            {task.orders.map((order, index) => (
+            {task.orders.map((order) => (
               <FeedCardItem key={order.id} order={order} />
             ))}
           </div>

@@ -12,7 +12,7 @@ export const FeedShowExpiredButton = ({ showExpired, setShowExpired }) => {
 
     (showExpired)
       ? setBtnClassName("btn btn-secondary")
-      : setBtnClassName("btn btn-primary");
+      : setBtnClassName("btn btn-hubbub");
   }, [showExpired]);
 
   const handleShowExpiredToggle = () => setShowExpired(!showExpired);

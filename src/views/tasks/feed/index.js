@@ -82,7 +82,7 @@ export const Index = () => {
         setExpiredTasks(cachedData.tasks.filter(expiredTaskOnly));
         setIsLoading(false);
       } else {
-        getData(process.env.REACT_APP_SERVER + `/tasks/feed`)
+        getData(url)
         .then(cacheData)
         .catch(console.error);
       }
