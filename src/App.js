@@ -19,6 +19,10 @@ import { Index as Login } from './views/auth/login';
 import { Index as TaskDetails } from './views/tasks/details';
 import { Index as TaskFeed } from './views/tasks/feed';
 
+import { Index as OrdersRecord } from './views/orders/record';
+
+import { Index as Main } from './views/main';
+
 import { PageNotFound } from './views/errors/E404';
 
 import { useAnalytics } from './hooks/Analytics';
@@ -52,9 +56,13 @@ const routes = createRoutesFromElements(
 
     <Route exact path="/login" element={<Login />} />
 
-    <Route exact path="/tasks/feed" loader={useCredentials} element={<TaskFeed />} />
+    <Route exact path="/" element={<Main />} />
 
+    <Route exact path="/tasks/feed" loader={useCredentials} element={<TaskFeed />} />
+    
     <Route exact path="/task/:taskId" element={<TaskDetails />} />
+
+    <Route exact path="/orders" loader={useCredentials} element={<OrdersRecord />} />
 
   </Route>
 );
