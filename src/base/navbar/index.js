@@ -54,7 +54,7 @@ export const Index = () => {
 
         <div className={navClassName} id="navbarNavDropdown">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <NavbarLink className="nav-link active fw-bold text-dark" to="/info">Info</NavbarLink>
+            <NavbarLink className="nav-link active fw-bold text-dark" to="/orders?page_number=1&page_amount=25">Orders</NavbarLink>
             {(courierId && courierSessionToken)
               ? <NavbarLink className="nav-link text-dark" onClick={handleLogout}>Logout</NavbarLink>
               : <NavbarLink className="nav-link text-dark" to="/login">Login</NavbarLink>
