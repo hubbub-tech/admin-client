@@ -89,7 +89,8 @@ export const Index = () => {
     };
 
     setIsLoading(true);
-    getCachedData(process.env.REACT_APP_SERVER + '/tasks/feed')
+    getData(process.env.REACT_APP_SERVER + '/tasks/feed')
+    .then(cacheData)
     .catch(console.error);
 
     console.log({ feedTasks, expiredTasks, tasks })
